@@ -1,0 +1,11 @@
+<% 
+    selectboxHelper = (name, items, optionSelected = '') => {
+        let xhtml = '';
+
+        items.forEach((item) => {
+            let selected = (item.id == optionSelected) ? `selected="selected"` : '';
+            xhtml += `<option value="${item._id}" ${selected}>${item.name}</option>`;
+        });
+        return `<select name="${name}" class="form-control">${xhtml}</select>`;
+    }
+%>

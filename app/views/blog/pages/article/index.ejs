@@ -1,0 +1,64 @@
+<%
+    const folder_uploads = 'uploads/articles/'
+%>
+
+<div class="col-lg-8 post-list">
+		<!-- Start single-post Area -->
+	<div class="single-post-wrap">
+		<% if(itemArticle) { %>
+			<div class="feature-img-thumb relative">
+				<div class="overlay overlay-bg"></div>
+				<img class="img-fluid" src="<%= folder_uploads + itemArticle.thumb %>" alt="post-image">
+			</div>
+			<div class="content-wrap">
+				<ul class="tags mt-10">
+					<li><a href="#"><%= itemArticle.category.name %></a></li>
+				</ul>
+				<a href="#">
+					<h3><%= itemArticle.name %></h3>
+				</a>
+				<ul class="meta pb-20">
+					<li><a href="#"><span class="lnr lnr-user"></span><%= itemArticle.created.user_name %></a></li>
+					<li><a href="#"><span class="lnr lnr-calendar-full"></span><%= moment(itemArticle.created.time).format(systemConfig.format_time_frontend) %></a></li>
+				</ul>
+				<%- itemArticle.content %>
+			</div>
+		<% } %>
+		<div class="relavent-story-post-wrap mt-30">
+			<h4 class="title">Relavent Stories</h4>
+			<div class="relavent-story-list-wrap">
+				<% itemsOthers.forEach((item) => { %>
+					<div class="single-relavent-post row align-items-center">
+						<div class="col-lg-5 post-left">
+							<div class="feature-img relative">
+								<div class="overlay overlay-bg"></div>
+								<img class="img-fluid" src="<%= folder_uploads + item.thumb %>" alt="others-post-image">
+							</div>
+							<ul class="tags">
+								<li><a href="#"><%= item.category.name %></a></li>
+							</ul>
+						</div>
+						<div class="col-lg-7 post-right">
+							<a href="article/<%= item.slug %>">
+								<h4><%= item.name %></h4>
+							</a>
+							<ul class="meta">
+								<li><a href="#"><span class="lnr lnr-user"></span><%= item.created.user_name %></a></li>
+								<li>
+									<a href="#">
+										<span class="lnr lnr-calendar-full"></span>
+										<%= moment(item.created.time).format(systemConfig.format_time_frontend) %>
+									</a>
+								</li>
+							</ul>
+							<p class="excert">
+								<%= item.content.replace(/(<([^>]+)>)/igm, "").substr(0,150) %> ...
+							</p>
+						</div>
+					</div>
+				<% }) %>
+			</div>
+		</div>
+	</div>
+	<!-- End single-post Area -->
+</div>

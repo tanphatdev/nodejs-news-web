@@ -1,0 +1,15 @@
+<% 
+    filterStatusHelper = (linkPrefix, statusFilter, keyword) => {
+        let htmlStatus = '';
+        statusFilter.forEach( (item)=> {
+            let link = linkPrefix +  'status/' + item.value;
+            if(keyword) link += '?keyword=' + keyword;
+            htmlStatus += `
+                <a class="btn m-b-sm btn-${item.class} btn-sm" href="/${link}">
+                    ${item.name.toUpperCase()}
+                    (${item.count})
+                </a>`;
+        })
+        return htmlStatus;
+    }
+%>

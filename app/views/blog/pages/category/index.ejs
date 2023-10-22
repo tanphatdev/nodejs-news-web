@@ -1,0 +1,44 @@
+<%
+    const folder_uploads = 'uploads/articles/'
+%>
+
+<div class="col-lg-8 post-list">
+    <!-- Start latest-post Area -->
+    <div class="latest-post-wrap">
+        <h4 class="cat-title">Category: <%= category.name %></h4>
+        <% itemsInCategory.forEach((item) => { %>
+            <div class="single-latest-post row align-items-center">
+                <div class="col-lg-5 post-left">
+                    <div class="feature-img relative">
+                        <div class="overlay overlay-bg"></div>
+                        <img class="img-fluid" src="<%= folder_uploads + item.thumb %>" alt="post-image">
+                    </div>
+                    <ul class="tags">
+                        <li>
+                            <a href="#"><%= item.category.name %></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-7 post-right">
+                    <a href="article/<%= item.slug %>">
+                        <h4><%= item.name %></h4>
+                    </a>
+                    <ul class="meta">
+                        <li>
+                            <a href="#"><span class="lnr lnr-user"></span><%= item.created.user_name %></a></li>
+                        <li>
+                            <a href="#">
+                                <span class="lnr lnr-calendar-full"></span>
+                                <%= moment(item.created.time).format(systemConfig.format_time_frontend) %>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="excert">
+                        <%= item.content.replace(/(<([^>]+)>)/igm, "").substr(0,150) %> ...
+                    </p>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+    <!-- End latest-post Area -->
+</div>

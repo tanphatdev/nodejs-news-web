@@ -1,0 +1,24 @@
+<% 
+    sortHelper=(collection, name, sortField, sortFieldCurrent, sortTypeCurrent, options)=> {
+        let link = linkPrefix + 'sort/' + sortField + '/asc';
+        let icon = '<i class="fa fa-fw fa-sort"></i>';
+        let style = (options != null) ? `style="${options}"` : '';
+
+        if(sortField == sortFieldCurrent) {
+            oder = (sortTypeCurrent == 'asc') ? 'desc' : 'asc';
+            link = linkPrefix + 'sort/' + sortField + '/' + oder;
+            icon = `<i class="fa fa-fw fa-sort-${sortTypeCurrent}"></i>`;
+        }
+
+        if(options != null) {
+            style = `style="${options}"`;
+        }
+
+        let xhtmlResult = `
+            <th class="pointer" ${style}>
+                <a href="${link}" class="title_col text-black">${name} ${icon}</a>
+            </th>
+        `
+        return xhtmlResult;
+    }
+%>

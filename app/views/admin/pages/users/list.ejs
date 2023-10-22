@@ -1,0 +1,139 @@
+<% include ./../../helpers/filter-status %>
+<% include ./../../helpers/status %>
+<% include ./../../helpers/pagination %>
+<% include ./../../helpers/sort %>
+<% include ./../../helpers/selectbox %>
+<%
+    const collection = 'users';
+    const linkPrefix = systemConfig.prefixAdmin + `/${collection}/`;
+%>
+
+<%- locals.flash %>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Search & Filter
+                <a href="<%= linkPrefix %>status/all">
+                    <span id="icon-reload" class="glyphicon glyphicon-refresh"></span>
+                </a>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="status-list col-sm-5 pl0">
+                        <%- filterStatusHelper(linkPrefix, statusFilter, keyword) %>
+                    </div>
+
+                    <div class="col-sm-2">
+                        <%- selectboxHelper('filter_group', groupsItems, groupID) %>
+                    </div>
+
+                    <div class="col-sm-5">
+                        <form action="<%= linkPrefix %>status/<%= currentStatus %>" method="GET">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="keyword" placeholder="Search for..."
+                                    value="<%= keyword %>">
+                                <input type="hidden" value="all">
+
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" type="submit">Search</button>
+                                </span>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" type="button">
+                                        <a href="<%= linkPrefix %>status/<%= currentStatus %>">Clear</a>
+                                    </button>
+                                </span>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                List Users
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <form role="form" class="form-inline zt-form" id="zt-form" action="" method="post">
+                    <div class="zcontrols">
+                        <select name="action" class="form-control slbAction">
+                            <option value="">Bulk Action</option>
+                            <option value="<%= linkPrefix %>change-status/active">Active</option>
+                            <option value="<%= linkPrefix %>change-status/inactive">Inactive</option>
+                            <option value="<%= linkPrefix %>delete">Delete</option>
+                        </select>
+                        <button class="btn btn-info btnAction" type="button" id="btn-action" value="btnAction" disabled>
+                            Apply
+                        </button>
+                        <div class="pull-right">
+                            <a href="<%= linkPrefix %>form" class="btn btn-warning btn-addNew">
+                                Add New
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" class="cbAll" />
+                                    </th>
+                                    <th>#</th>
+                                    <%- sortHelper(collection, 'User Name', 'username', sortField, sortType) %>
+                                    <th>Status</th>
+                                    <%- sortHelper(collection, 'Group', 'group.name', sortField, sortType) %>
+                                    <%- sortHelper(collection, 'Created', 'created', sortField, sortType) %>
+                                    <th>Modified</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% items.forEach( (item, index)=> { %>
+                                    <tr>
+                                        <td>
+                                            <input type="checkbox" name="cid" value="<%= item._id %>" />
+                                        </td>
+                                        <td>
+                                            <%= index + 1 %>
+                                        </td>
+                                        <td>
+                                            <%= item.username %>
+                                        </td>
+                                        <td>
+                                            <%- statusHelper(linkPrefix, item.status, item._id ) %>
+                                        </td>
+                                        <td>
+                                            <%= item.group.name %>
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
+                                            <%= moment(item.created).format(systemConfig.format_long_time) %><br/>
+                                        </td>
+                                        <td>
+                                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span> 
+                                            <%= moment(item.modified).format(systemConfig.format_long_time) %><br/>
+                                        </td>
+                                        <td>
+                                            <a href="<%= linkPrefix %>form/<%= item._id %>" type="button" class="btn btn-warning btn-sm">Edit</a>
+                                            <a href="<%= linkPrefix %>delete/<%= item._id %>" type="button" class="btn btn-danger btn-sm btn-delete">
+                                                Delete
+                                            </a>
+                                        </td>
+                                    </tr>
+                                <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <%- paginationHelper(pagination, linkPrefix, currentStatus, keyword) %>
+    </div>
+</div>

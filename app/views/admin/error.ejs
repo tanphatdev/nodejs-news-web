@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <% include ./elements/header %>
+</head>
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <% include ./elements/navbar-header %>
+            <% include ./elements/navbar-right %>
+            <div class="navbar-default navbar-static-side" role="navigation">
+                <div class="sidebar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li>
+                            <a href="<%= systemConfig.prefixAdmin %>">
+                                <i class="fa fa-dashboard fa-fw"></i> Home
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div id="page-wrapper">
+            <%- body %>
+        </div>
+    </div>
+    <% include ./elements/scripts %>
+</body>
+
+</html>

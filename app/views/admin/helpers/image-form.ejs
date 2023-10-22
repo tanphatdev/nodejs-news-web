@@ -1,0 +1,9 @@
+<% 
+    imageFormHelper = (itemId, imageId, folder, imageName, style) => {
+        if(itemId && imageName) {
+            return `<img id="${imageId}" src="${folder + imageName}" alt="image-upload" style="${style}">`;
+        } else {
+            return `<img id="${imageId}" src="" alt="image-upload" style="display: none; ${style}">`;
+        }
+    }
+%>

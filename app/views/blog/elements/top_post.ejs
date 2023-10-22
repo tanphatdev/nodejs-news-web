@@ -1,0 +1,83 @@
+<%
+    const folder_uploads = 'uploads/articles/'
+%>
+<section class="top-post-area pt-10">
+    <div class="container no-padding">
+        <div class="row small-gutters">
+            <div class="col-lg-8 top-post-left">
+                <div class="feature-image-thumb relative">
+                    <div class="overlay overlay-bg"></div>
+                    <img class="img-fluid" src="<%= folder_uploads + itemsSpecial[0].thumb %>" alt="top-post-image">
+                </div>
+                <div class="top-post-details">
+                    <ul class="tags">
+                        <li><a href="#"><%= itemsSpecial[0].category.name %></a></li>
+                    </ul>
+                    <a href="article/<%= itemsSpecial[0].slug %>">
+                        <h3><%= itemsSpecial[0].name %></h3>
+                    </a>
+                    <ul class="meta">
+                        <li><a href="#"><span class="lnr lnr-user"></span><%= itemsSpecial[0].created.user_name %></a></li>
+                        <li>
+                            <a href="#">
+                                <span class="lnr lnr-calendar-full"></span>
+                                <%= moment(itemsSpecial[0].created.time).format(systemConfig.format_time_frontend) %>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 top-post-right">
+                <div class="single-top-post">
+                    <div class="feature-image-thumb relative">
+                        <div class="overlay overlay-bg"></div>
+                        <img class="img-fluid" src="<%= folder_uploads + itemsSpecial[1].thumb %>" alt="top-post-image">
+                    </div>
+                    <div class="top-post-details">
+                        <ul class="tags">
+                            <li><a href="#"><%= itemsSpecial[1].category.name %></a></li>
+                        </ul>
+                        <a href="article/<%= itemsSpecial[0].slug %>">
+                            <h4><%= itemsSpecial[1].name %></h4>
+                        </a>
+                        <ul class="meta">
+                            <li>
+                                <a href="#"><span class="lnr lnr-user"></span><%= itemsSpecial[1].created.user_name %></a></li>
+                            <li>
+                                <a href="#">
+                                    <span class="lnr lnr-calendar-full"></span>
+                                    <%= moment(itemsSpecial[1].created.time).format(systemConfig.format_time_frontend) %>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="single-top-post mt-10">
+                    <div class="feature-image-thumb relative">
+                        <div class="overlay overlay-bg"></div>
+                        <img class="img-fluid" src="<%= folder_uploads + itemsSpecial[2].thumb %>" alt="top-post-image">
+                    </div>
+                    <div class="top-post-details">
+                        <ul class="tags">
+                            <li><a href="#"><%= itemsSpecial[2].category.name %></a></li>
+                        </ul>
+                        <a href="article/<%= itemsSpecial[0].slug %>">
+                            <h4><%= itemsSpecial[2].name %></h4>
+                        </a>
+                        <ul class="meta">
+                            <li>
+                                <a href="#"><span class="lnr lnr-user"></span><%= itemsSpecial[2].created.user_name %></a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <span class="lnr lnr-calendar-full"></span>
+                                    <%= moment(itemsSpecial[2].created.time).format(systemConfig.format_time_frontend) %>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
